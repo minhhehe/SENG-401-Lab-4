@@ -15,7 +15,13 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('isbn');
+            $table->smallInteger('year');
+            $table->string('publisher');
+            $table->enum('subscription_status', [/* TODO Fill in enum vals  */ '']);
             $table->timestamps();
+            $table->image();
         });
     }
 
