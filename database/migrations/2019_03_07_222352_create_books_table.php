@@ -19,7 +19,7 @@ class CreateBooksTable extends Migration
             $table->string('isbn');
             $table->smallInteger('year');
             $table->string('publisher');
-            $table->enum('subscription_status', [/* TODO Fill in enum vals  */ '']);
+            $table->enum('subscription_status', ['subscribed', 'unsubscribed']);
             $table->timestamps();
             $table->image();
         });
