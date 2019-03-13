@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Book;
 
 class BooksController extends Controller
 {
@@ -15,6 +16,9 @@ class BooksController extends Controller
     public function index()
     {
         //
+        $books = Book::all();
+
+        return view('books.index', ['books' => $books]);
     }
 
     /**
@@ -44,9 +48,13 @@ class BooksController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Book $book)
     {
         //
+
+        $authors = $book->getAuthors($book);
+
+        return view('books.show', compact(['book', 'authors']));
     }
 
     /**

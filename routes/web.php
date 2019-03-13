@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('books', 'BooksController');
+Route::resource('authors', 'AuthorsController');
+Route::resource('subscriptions', 'SubscriptionsController');
+Route::resource('users', 'UsersController');
+Route::get('/comments', 'CommentsController@index');

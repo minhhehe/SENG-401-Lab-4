@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Book;
 use Illuminate\Http\Request;
 
 class SubscriptionsController extends Controller
@@ -25,6 +26,9 @@ class SubscriptionsController extends Controller
     public function create()
     {
         //
+        $books = \App\Book::all();
+        $users = \User::all();
+        return view('subcriptions.create', compact(['books','users']));
     }
 
     /**
