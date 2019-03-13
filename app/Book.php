@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Subscription;
+use Illuminate\Support\Facades\DB;
 
 
 class Book extends Model
 {
     //
 
+    protected $guarded = [];
     public function getAuthors() {
 
 
@@ -17,4 +20,15 @@ class Book extends Model
 
       return $authors;
     }
+
+    public function getSubscriber() {
+      $subscriber = DB::table('subscriptions')
+        ->join('users', 'users.id', '=', 'subscriptions.user_id')
+        ->join('books', 'books.id', '=', 'subscriptions.book_id')
+        ->select('users.email')
+        ->where('books.id', '=', $this->id)
+        ->get();
+      return $subscriber;
+    }
+
 }

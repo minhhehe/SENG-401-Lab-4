@@ -7,7 +7,7 @@
     <div>
       <img src="{{ $book->image }}" alt="{{$book->name}}">
     </div>
-    
+
     <div class="field">
       <label class="label">Book's name:</label>
 
@@ -31,6 +31,9 @@
 
         <div>
           Subscription status: {{ $book->sub_status }}
+          @if (count($subscriber) > 0)
+            by {{ $subscriber[0]->email }}
+          @endif
         </div>
 
     </div>

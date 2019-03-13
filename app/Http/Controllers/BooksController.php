@@ -53,8 +53,8 @@ class BooksController extends Controller
         //
 
         $authors = $book->getAuthors($book);
-
-        return view('books.show', compact(['book', 'authors']));
+        $subscriber = $book->getSubscriber($book);
+        return view('books.show', compact(['book', 'authors', 'subscriber']));
     }
 
     /**
@@ -63,9 +63,10 @@ class BooksController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user, Book $book)
     {
         //
+        return view('books.edit', compact('book'));
     }
 
     /**
