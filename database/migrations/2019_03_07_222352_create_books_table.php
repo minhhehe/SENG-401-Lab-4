@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->string('publisher');
             $table->enum('subscription_status', ['subscribed', 'unsubscribed']);
             $table->timestamps();
-            $table->image();
+            $table->string('image');
         });
     }
 
