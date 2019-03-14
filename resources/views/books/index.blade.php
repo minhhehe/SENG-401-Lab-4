@@ -17,7 +17,7 @@
 
 
   <p>
-    <a href="/projects/create"> Create a new one </a>
+    <a href="/books/create"> Create a new one </a>
   </p>
 
 @stop

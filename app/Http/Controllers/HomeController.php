@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $role = auth()->user()->role;
+      if ($role == 'admin')
+        return view('homeAdmin');
+      else if ($role == 'subscriber')
+        return view('homeSubscriber');
+      else return view('homeVisitor');
     }
 }
