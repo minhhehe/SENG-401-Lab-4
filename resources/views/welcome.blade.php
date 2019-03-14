@@ -11,6 +11,7 @@
 
         <!-- Styles -->
         <style>
+
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -22,6 +23,12 @@
             .is-complete {
               text-decoration: line-through;;
             }
+
+            .container_big { border:2px solid #ccc; width:600px; height: 300px; overflow-y: scroll; }
+
+            .container_medium { border:2px solid #ccc; width:450px; height: 100px; overflow-y: scroll; }
+
+            .container_small { border:2px solid #ccc; width:300px; height: 100px; overflow-y: scroll; }
 
             .full-height {
                 height: 100vh;

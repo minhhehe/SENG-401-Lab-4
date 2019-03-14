@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container_small">
       @foreach ($authors as $author)
         <input type="checkbox" name="authors[]" value="{{$author->id}}"> <label class="label">{{$author->name}}</label>
         <br />

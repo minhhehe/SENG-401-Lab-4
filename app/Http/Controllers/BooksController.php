@@ -19,12 +19,9 @@ class BooksController extends Controller
     {
         //
         $role = auth()->user()->role;
-        if ($role == 'subscriber')
-          $book = User::getSubscribedBooks(auth()->user());
-        else
-          $books = Book::orderBy('created_at', 'asc')->get();
+        $books = Book::orderBy('created_at', 'asc')->get();
 
-        return view('books.index', ['books' => $books]);
+        return view('books.index', compact(['books','role']));
     }
 
     public function indexForSubscriber() {

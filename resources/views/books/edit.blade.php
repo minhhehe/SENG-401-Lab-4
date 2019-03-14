@@ -1,8 +1,6 @@
 @extends('welcome')
 
-<style>
-  .container { border:2px solid #ccc; width:300px; height: 100px; overflow-y: scroll; }
-</style>
+
 
 @section('content')
   <h1> Book Edit Page </h1>
@@ -45,7 +43,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container_small">
       @foreach ($authors as $author)
         <input type="checkbox" name="authors[]" value="{{$author->id}}"> <label class="label">{{$author->name}}</label>
         <br />

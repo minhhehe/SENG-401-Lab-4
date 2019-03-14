@@ -36,9 +36,9 @@
           @endif
         </div>
 
-        <div>
+        <div class="container_medium">
+          Comments:
           @if (count($comments) > 0)
-            Comments:
             @foreach ($comments as $comment)
               <div>
                 {{$comment->email}} on {{$comment->created_at}} said:
@@ -46,6 +46,7 @@
                 </br>
               <div>
             @endforeach
+          @else No comment yet! Be the first to comment!
           @endif
         </div>
     </div>
