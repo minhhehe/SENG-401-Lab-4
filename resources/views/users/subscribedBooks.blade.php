@@ -8,14 +8,12 @@
                 <div class="card-header">Dashboard</div>
                    Welcome Mr. {{$user->email}}(lol)
 
-                   Here are what you can do:
-
-                  <a href="/books"> View all your books </a>
-
-                  <a href="/authors"> View alllll the authors </a>
+                   Here are books you have been subscribed to:
 
 
-                  <a href="/{{$user->id}}/books/">View all the books you have subscribed</a>
+                  @foreach ($books as $book)
+                    <a href='/books/{{$book->id}}'> {{$book->name}} </a>
+                  @endforeach
                 </div>
             </div>
         </div>

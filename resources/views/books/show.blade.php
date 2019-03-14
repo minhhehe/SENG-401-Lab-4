@@ -44,7 +44,7 @@
                 {{$comment->email}} on {{$comment->created_at}} said:
                   {{$comment->comment}}
                 </br>
-              <div>
+              </div>
             @endforeach
           @else No comment yet! Be the first to comment!
           @endif

@@ -24,10 +24,11 @@ class HomeController extends Controller
     public function index()
     {
       $role = auth()->user()->role;
+      $user = auth()->user();
       if ($role == 'admin')
-        return view('homeAdmin');
+        return view('homeAdmin',   compact(['user']));
       else if ($role == 'subscriber')
-        return view('homeSubscriber');
+        return view('homeSubscriber', compact(['user']));
       else return view('homeVisitor');
     }
 }

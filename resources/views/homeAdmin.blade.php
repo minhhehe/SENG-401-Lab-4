@@ -17,6 +17,7 @@
                   <a href="/authors"> View alllll the authors </a>
                   <a href="/authors/create"> Add a new author to the database </a>
 
+                  <a href="/{{$user->id}}/books/">View all the books you have subscribed</a>
 
                 </div>
             </div>

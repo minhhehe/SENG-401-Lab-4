@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -19,6 +20,12 @@ class UsersController extends Controller
         return view('users.index', compact(['users']));
     }
 
+    public function indexForSubscriber(User $user) {
+
+      $books = User::getSubscribedBooks($user);
+
+      return view('users.subscribedBooks', compact(['books', 'user']));
+    }
     /**
      * Show the form for creating a new resource.
      *

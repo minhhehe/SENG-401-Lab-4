@@ -30,3 +30,5 @@ Route::resource('subscriptions', 'SubscriptionsController');
 Route::resource('users', 'UsersController');
 Route::get('/comments', 'CommentsController@index');
 Route::post('/comments', 'CommentsController@store');
+
+Route::get('/{user}/books', 'UsersController@indexForSubscriber');
