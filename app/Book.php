@@ -12,6 +12,7 @@ class Book extends Model
     //
 
     protected $guarded = [];
+
     public function getAuthors() {
 
 
@@ -19,6 +20,18 @@ class Book extends Model
       $authors = Author::whereIn('id', $authorsIDs->pluck('author_id'))->get();
 
       return $authors;
+    }
+
+    public function getComments() {
+
+      $comments = DB::table('comments')
+        ->join('users', 'users.id', '=', 'comments.user_id')
+        ->join('books', 'books.id', '=', 'comments.book_id')
+        ->select('users.email', 'comments.comment', 'comments.created_at')
+        ->where('books.id', '=', $this->id)
+        ->get();
+      return $comments;
+
     }
 
     public function getSubscriber() {

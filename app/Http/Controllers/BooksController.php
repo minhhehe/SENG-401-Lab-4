@@ -28,7 +28,7 @@ class BooksController extends Controller
     }
 
     public function indexForSubscriber() {
-      
+
     }
 
     /**
@@ -89,8 +89,9 @@ class BooksController extends Controller
         //
         $role = auth()->user()->role;
         $authors = $book->getAuthors($book);
+        $comments = $book->getComments();
         $subscriber = $book->getSubscriber($book);
-        return view('books.show', compact(['book', 'authors', 'subscriber', 'role']));
+        return view('books.show', compact(['book', 'authors', 'subscriber', 'role', 'comments']));
     }
 
     /**

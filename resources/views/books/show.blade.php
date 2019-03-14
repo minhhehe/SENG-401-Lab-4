@@ -36,15 +36,44 @@
           @endif
         </div>
 
+        <div>
+          @if (count($comments) > 0)
+            Comments:
+            @foreach ($comments as $comment)
+              <div>
+                {{$comment->email}} on {{$comment->created_at}} said:
+                  {{$comment->comment}}
+                </br>
+              <div>
+            @endforeach
+          @endif
+        </div>
     </div>
   </book>
+
+  @if ($role == 'admin' || $role == 'subscriber')
+    <form class="form" action="/comments" method="post">
+      {{ @csrf_field() }}
+      <div class="field">
+        <label class="label">Add a comment</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Your comment..." name="comment">
+          <input class="input" type="text" value="{{$book->id}}" name="book_id" hidden>
+          <button type="submit">Comment</button>
+        </div>
+      </div>
+
+    </form>
+  @endif
+
   @if ($role == 'admin')
     <p>
-      <a href="/projects/{{$book->id}}"> Edit this book </a>
+      <a href="/books/{{$book->id}}"> Edit this book </a>
     </p>
     <p>
-      <a href="/projects/create"> Create a new one </a>
+      <a href="/books/create"> Create a new one </a>
     </p>
   @endif
 
+  @include('error')
 @stop
