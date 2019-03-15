@@ -24,6 +24,7 @@
           Books subscribed to:
           @foreach ($books as $book)
             <a href="/books/{{ $book->id }}"> {{$book->name}} </a>
+          </br>
           @endforeach
         </div>
 
