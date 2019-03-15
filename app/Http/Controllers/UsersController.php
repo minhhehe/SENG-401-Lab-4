@@ -56,6 +56,7 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //
+        return view('users.show', compact(['user']));
     }
 
     /**
@@ -67,6 +68,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         //
+        return view('users.edit', compact(['user']));
     }
 
     /**
@@ -79,6 +81,13 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        $data = request()->validate([
+          'email' => ['required', 'email'],
+          'role' => ['required'],
+          'education_field' => ['required'],
+          'birthday' => ['required, date'],
+        ]);
+        $user->update($data);
     }
 
     /**

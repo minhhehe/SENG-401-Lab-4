@@ -87,8 +87,10 @@ class CommentsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, Comment $comment)
     {
         //
+        $comment->delete();
+        return back();
     }
 }

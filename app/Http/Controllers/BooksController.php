@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Book;
 use App\Author;
 use App\AuthorBook;
+use App\Subscription;
 
 class BooksController extends Controller
 {
@@ -146,8 +147,12 @@ class BooksController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, Book $book)
     {
         //
+        $subscriptions = Subscription::where('book_id', $book->id)->get();
+        foreach($subscriptions as $subscription) $subscription->delete();
+        $book->delete();
+        return redirect('/books');
     }
 }

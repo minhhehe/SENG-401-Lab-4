@@ -44,17 +44,27 @@ class SubscriptionsController extends Controller
     public function store(Request $request)
     {
         //
+        $toGo = '/subscriptions';
+        if ($request['user_id'] == null) {
+          $toGo = '/books/'.$request['book_id'];
+          $request['user_id'] = auth()->user()->id;
+        }
         $bookIds = Subscription::where('book_id', $request['book_id'])->get()->pluck('book_id');
         $validated = request()->validate([
           'user_id' => ['required'],
           'book_id' => ['required', Rule::notIn($bookIds)],
         ]);
+        $user = User::find($request['book_id']);
 
         $datBook = Book::where('id', $request['book_id'])->get()->first();
         $datBook->update(['sub_status' => 'subscribed']);
 
           Subscription::create($validated);
-          return redirect('/subscriptions');
+
+          if (auth()->user()->role == "subscriber") {
+            $request['user_id'] = auth()->user()->id;
+          }
+          return redirect($toGo);
     }
 
     /**
@@ -93,6 +103,25 @@ class SubscriptionsController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyFromUser(Request $request)
+    {
+        $datBook = Book::find($request['book_id']);
+        $subscription = Subscription::where('book_id', $request['book_id'])->get()->first();
+
+        $subscription->delete();
+        //Subscription::delete($subscription);
+
+        $datBook->update(['sub_status' => 'unsubscribed']);
+        return redirect('/books/'.$request['book_id']);
+    }
+
 
     /**
      * Remove the specified resource from storage.

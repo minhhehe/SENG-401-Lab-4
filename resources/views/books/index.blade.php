@@ -10,7 +10,12 @@
         <a href="{{ action('BooksController@show', [$book->id])}}"> {{ $book->name}} </a>
         @if ($role == 'admin')
         <p>
-          <a href="/books/{{ $book->id }}/edit"> Edit </a>
+          <a href="/books/{{ $book->id }}/edit"> Edit this book </a> OR
+          <form action="/books/{{ $book->id }}" method="post">
+            {{ @csrf_field() }}
+            {{ @method_field('DELETE') }}
+            <button type="submit" name="deleteButton">Delete it</button>
+          </form>
         </p>
         @endif
     </article>

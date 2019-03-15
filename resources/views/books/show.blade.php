@@ -44,6 +44,13 @@
                 {{$comment->email}} on {{$comment->created_at}} said:
                   {{$comment->comment}}
                 </br>
+                @if ($role == 'admin')
+                <form action="/comments/{{ $comment->id }}" method="post">
+                  {{ @csrf_field() }}
+                  {{ @method_field('DELETE') }}
+                  <button type="submit" name="deleteButton">Delete this comment</button>
+                </form>
+                @endif
               </div>
             @endforeach
           @else No comment yet! Be the first to comment!
@@ -63,17 +70,40 @@
           <button type="submit">Comment</button>
         </div>
       </div>
-
     </form>
+    @if ($book->sub_status == 'unsubscribed')
+    <form class="form" action="/subscriptions" method="post">
+      {{ @csrf_field() }}
+      <div class="field">
+        <div class="control">
+          <input class="input" type="text" name="book_id" value="{{$book->id}}" hidden>
+          <button type="submit" name="submitButton">Subscribe</button>
+        </div>
+      </div>
+    </form>
+    @else
+    <form class="form" action="subscriptions/books" method="post">
+      {{ @csrf_field() }}
+      {{ method_field('DELETE') }}
+      <div class="field">
+        <div class="control">
+          <input class="input" type="text" name="book_id" value="{{$book->id}}" hidden>
+          <button type="submit" name="submitButton">Unsubscribe</button>
+        </div>
+      </div>
+    </form>
+    @endif
   @endif
 
   @if ($role == 'admin')
-    <p>
-      <a href="/books/{{$book->id}}"> Edit this book </a>
-    </p>
-    <p>
-      <a href="/books/create"> Create a new one </a>
-    </p>
+  <p>
+    <a href="/books/{{ $book->id }}/edit"> Edit this book </a> OR
+    <form action="/books/{{ $book->id }}" method="post">
+      {{ @csrf_field() }}
+      {{ @method_field('DELETE') }}
+      <button type="submit" name="deleteButton">Delete it</button>
+    </form>
+  </p>
   @endif
 
   @include('error')

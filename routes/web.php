@@ -27,8 +27,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('books', 'BooksController');
 Route::resource('authors', 'AuthorsController');
 Route::resource('subscriptions', 'SubscriptionsController');
+Route::delete('books/subscriptions/books', 'SubscriptionsController@destroyFromUser');
 Route::resource('users', 'UsersController');
-Route::get('/comments', 'CommentsController@index');
-Route::post('/comments', 'CommentsController@store');
+Route::resource('comments', 'CommentsController');
 
 Route::get('/{user}/books', 'UsersController@indexForSubscriber');

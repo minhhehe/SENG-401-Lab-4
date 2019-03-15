@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Author;
 use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
@@ -15,6 +16,9 @@ class AuthorsController extends Controller
     public function index()
     {
         //
+        $role = auth()->user()->role;
+        $authors = Author::get();
+        return view('authors.index', compact(['authors', 'role']));
     }
 
     /**
@@ -25,6 +29,7 @@ class AuthorsController extends Controller
     public function create()
     {
         //
+        return view('authors.create');
     }
 
     /**
@@ -36,6 +41,13 @@ class AuthorsController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = request()->validate([
+          'name' => ['required'],
+        ]);
+
+        Author::create($validated);
+
+        return view('authors.index');
     }
 
     /**
@@ -44,9 +56,13 @@ class AuthorsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Author $author)
     {
         //
+        $role = auth()->user()->role;
+        $books = $author->getBooks();
+        return view('authors.show', compact('author', 'books', 'role'));
+
     }
 
     /**
@@ -55,9 +71,10 @@ class AuthorsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user, Author $author)
     {
         //
+        return view('authors.edit', compact('author'));
     }
 
     /**
@@ -67,9 +84,18 @@ class AuthorsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user, Author $author)
     {
         //
+        $author->update(request([
+          'name'
+        ]));
+
+        // create new data in author_books instead of updating since there
+        // might be updating problems when the number of authors in
+        // update is difference from the original
+
+        return redirect('authors/'.$author->id);
     }
 
     /**
@@ -78,8 +104,10 @@ class AuthorsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, Author $author)
     {
         //
+        $author->delete();
+        return redirect('/authors');
     }
 }

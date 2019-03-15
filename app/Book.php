@@ -27,7 +27,7 @@ class Book extends Model
       $comments = DB::table('comments')
         ->join('users', 'users.id', '=', 'comments.user_id')
         ->join('books', 'books.id', '=', 'comments.book_id')
-        ->select('users.email', 'comments.comment', 'comments.created_at')
+        ->select('comments.id', 'users.email', 'comments.comment', 'comments.created_at')
         ->where('books.id', '=', $this->id)
         ->get();
       return $comments;
@@ -43,5 +43,7 @@ class Book extends Model
         ->get();
       return $subscriber;
     }
+
+
 
 }
