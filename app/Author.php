@@ -11,9 +11,11 @@ class Author extends Model
     //
 
     protected $guarded=[];
-    
-    public function books() {
-      $this->hasMany(Book::class, 'ISBN');
+
+    //
+    public function books()
+    {
+      return $this->belongsToMany('App\Book', 'author_book', 'author_id', 'book_id');
     }
 
     public function getBooks() {
@@ -25,4 +27,6 @@ class Author extends Model
         ->get();
       return $books;
     }
+
+
 }
