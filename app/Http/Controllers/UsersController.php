@@ -56,7 +56,8 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //
-        return view('users.show', compact(['user']));
+        $books = User::getSubscribedBooks($user);
+        return view('users.show', compact(['user', 'books']));
     }
 
     /**
@@ -85,9 +86,10 @@ class UsersController extends Controller
           'email' => ['required', 'email'],
           'role' => ['required'],
           'education_field' => ['required'],
-          'birthday' => ['required, date'],
+          'birthday' => ['required', 'date'],
         ]);
         $user->update($data);
+        return redirect('/users');
     }
 
     /**
