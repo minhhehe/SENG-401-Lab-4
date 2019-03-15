@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Author;
+use App\AuthorBook;
 use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
@@ -107,6 +108,8 @@ class AuthorsController extends Controller
     public function destroy(User $user, Author $author)
     {
         //
+        $author_books = AuthorBook::where('author_id', $author->id)->get();
+        foreach($author_books as $author_book) $author_book->delete();
         $author->delete();
         return redirect('/authors');
     }

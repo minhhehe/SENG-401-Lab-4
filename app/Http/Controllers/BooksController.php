@@ -8,6 +8,7 @@ use App\Book;
 use App\Author;
 use App\AuthorBook;
 use App\Subscription;
+use App\Comment;
 
 class BooksController extends Controller
 {
@@ -151,7 +152,11 @@ class BooksController extends Controller
     {
         //
         $subscriptions = Subscription::where('book_id', $book->id)->get();
+        $comments = Comment::where('book_id', $book->id)->get();
+        $author_books = AuthorBook::where('book_id', $book->id)->get();
         foreach($subscriptions as $subscription) $subscription->delete();
+        foreach($comments as $comment) $comment->delete();
+        foreach($author_books as $author_book) $author_book->delete();
         $book->delete();
         return redirect('/books');
     }

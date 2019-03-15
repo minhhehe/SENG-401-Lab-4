@@ -44,6 +44,15 @@ class Book extends Model
       return $subscriber;
     }
 
+    //
+    public function authors() {
+      return $this->belongsToMany('App\Author', 'author_book', 'author_id', 'book_id');
+    }
+    
+    public function comments()
+    {
+      return $this->hasMany('App\Comment');
+    }
 
 
 }
