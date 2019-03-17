@@ -29,6 +29,6 @@ class HomeController extends Controller
         return view('homeAdmin',   compact(['user']));
       else if ($role == 'subscriber')
         return view('homeSubscriber', compact(['user']));
-      else return view('homeVisitor');
+      else return view('homeVisitor', compact(['user']));
     }
 }

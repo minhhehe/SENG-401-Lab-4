@@ -73,7 +73,20 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">Dashboard</div>
+                               Welcome {{ $user->role }} {{ $user->email }}
+
+                                 @yield('home_menu')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>
