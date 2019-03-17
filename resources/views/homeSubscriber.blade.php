@@ -1,6 +1,6 @@
 @extends('layouts.userhome')
 
-@section('content')
+<!-- @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -21,4 +21,10 @@
         </div>
     </div>
 </div>
+@endsection -->
+
+@section('home_menu')
+<a href="/books"> View all your books </a>
+<a href="/authors"> View alllll the authors </a>
+<a href="/{{$user->id}}/books/">View all the books you have subscribed</a>
 @endsection

@@ -78,10 +78,11 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header">Dashboard</div>
-                               Welcome {{ $user->role }} {{ $user->email }}
+                            <div class="card-header">Dashboard: {{ $user->role }}</div>
+                               Welcome {{ $user->email }}
 
                                  @yield('home_menu')
+
                             </div>
                         </div>
                     </div>
