@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layouts.welcome')
 
 <style>
   .container { border:2px solid #ccc; width:300px; height: 100px; overflow-y: scroll; }

@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layouts.welcome')
 
 @section('content')
   <h1>Subscribe a user to a book</h1>

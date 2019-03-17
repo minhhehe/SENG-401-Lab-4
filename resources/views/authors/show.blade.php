@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layouts.welcome')
 
 @section('content')
   <h1> Author detail Page </h1>
