@@ -1,6 +1,6 @@
 @extends('layouts.userhome')
 
-@section('content')
+<!-- @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -17,4 +17,8 @@
         </div>
     </div>
 </div>
+@endsection -->
+
+@section('home_menu')
+  <a href="/books"> View all books </a>
 @endsection
