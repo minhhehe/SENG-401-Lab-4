@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,10 +12,23 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('books', 'BooksController');
+Route::resource('authors', 'AuthorsController');
+Route::resource('subscriptions', 'SubscriptionsController');
+Route::delete('books/subscriptions/books', 'SubscriptionsController@destroyFromUser');
+Route::resource('users', 'UsersController');
+Route::resource('comments', 'CommentsController');
+
+Route::get('/{user}/books', 'UsersController@indexForSubscriber');

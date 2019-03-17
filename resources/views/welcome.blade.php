@@ -11,6 +11,7 @@
 
         <!-- Styles -->
         <style>
+
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -19,6 +20,15 @@
                 height: 100vh;
                 margin: 0;
             }
+            .is-complete {
+              text-decoration: line-through;;
+            }
+
+            .container_big { border:2px solid #ccc; width:600px; height: 300px; overflow-y: scroll; }
+
+            .container_medium { border:2px solid #ccc; width:450px; height: 100px; overflow-y: scroll; }
+
+            .container_small { border:2px solid #ccc; width:300px; height: 100px; overflow-y: scroll; }
 
             .full-height {
                 height: 100vh;
@@ -81,18 +91,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Does This Work?
+                    SENG 401 Lab 04
                 </div>
-
+                @yield("content")
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+
                 </div>
+                @yield("footer")
             </div>
         </div>
     </body>

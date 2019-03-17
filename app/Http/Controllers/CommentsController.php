@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Book;
+use App\Comment;
 use Illuminate\Http\Request;
 
-class BookController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,15 +38,22 @@ class BookController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = request()->validate([
+          'comment' => ['required'],
+          'book_id' => ['required'],
+        ]);
+        $validated['user_id'] = auth()->user()->id;
+        Comment::create($validated);
+        return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show(User $user)
     {
         //
     }
@@ -52,10 +61,10 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(User $user)
     {
         //
     }
@@ -64,10 +73,10 @@ class BookController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Book  $book
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -75,11 +84,13 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Book  $book
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(User $user, Comment $comment)
     {
         //
+        $comment->delete();
+        return back();
     }
 }
