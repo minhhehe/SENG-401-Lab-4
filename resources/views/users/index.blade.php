@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layouts\app')
 
 @section('content')
   <h1> Users Page </h1>
