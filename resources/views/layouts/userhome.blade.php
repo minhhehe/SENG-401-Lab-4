@@ -36,6 +36,9 @@
 
                     </ul>
 
+                    <!-- Center of Navbar -->
+                    <span class="navbar-brand">Welcome @yield('user_identifier') </span>
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -79,7 +82,6 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">Dashboard: {{ $user->role }}</div>
-                               Welcome {{ $user->email }}
 
                                  @yield('home_menu')
 
