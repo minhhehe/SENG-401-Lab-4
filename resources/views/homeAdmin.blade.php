@@ -1,5 +1,9 @@
 @extends('layouts.userhome')
 
+@section('user_identifier')
+ {{ $user->email }}
+@endsection
+
 @section('home_menu')
   <a href="/books"> View alllll the books </a>
   <a href="/books/create"> Create a new book </a>
