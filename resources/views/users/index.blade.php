@@ -9,7 +9,7 @@
     <article>
         <a href="{{ action('UsersController@show', [$user->id])}}"> {{ $user->email}} </a>
         <p>
-          <a href="/$user/{{ $user->id }}/edit"> Edit this record </a>
+          <a href="/users/{{ $user->id }}/edit"> Edit this record </a>
         </p>
     </article>
   @endforeach
