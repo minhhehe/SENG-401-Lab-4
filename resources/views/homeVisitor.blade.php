@@ -1,7 +1,7 @@
 @extends('layouts.userhome')
 
 @section('user_identifier')
- {{ $user->email }}
+ {{ Auth::user()->email }}
 @endsection
 
 @section('home_menu')
