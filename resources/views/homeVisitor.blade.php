@@ -6,10 +6,12 @@
 
 @section('home_menu')
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="collapse navbar-collapse navbar-nav" id="viewAllBooksLink">
-      <a class="nav-item nav-link" href="/books"> View all books </a>
-  </div>
+<nav class="navbar navbar-light bg-light">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/books"> View all books </a>
+    </li>
+  </ul>
 </nav>
 
 @endsection
