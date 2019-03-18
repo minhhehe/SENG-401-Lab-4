@@ -1,37 +1,42 @@
-@extends('layouts.welcome')
+@extends('layouts.subpage')
+
+@section('page_title')
+  Author Information Page
+@endsection
+
+@section('subtitle')
+  <h5>{{$author->name}}</h5>
+@endsection
 
 @section('content')
-  <h1> Author detail Page </h1>
 
   <author>
-    <div class="field">
-      <label class="label">Author's name:</label>
 
-      <b> {{ $author->name }}</b>
-        <div>
+    <div class="field margin-center">
           Books:</br>
           @foreach ($books as $book)
-            <a href="/books/{{ $book->id }}"> {{ $book->name}} </a> </br>
-            @endforeach
+          <nav class="navbar navbar-light bg-light">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="/books/{{ $book->id }}"> {{$book->name}} </a></li>
+            </ul>
+          </nav>
+          @endforeach
+          <div class="h-divider"></div>
         </div>
+    </div>
 
   </author>
-
-
-
   @if ($role == 'admin')
-    <p>
-      <a href="/authors/{{$author->id}}/edit"> Edit this author </a>
-    </p>
-    <form action="/authors/{{ $author->id }}" method="post">
+
+    <a class="nav-link" href="/authors/{{$author->id}}/edit"> <button class="btn">Edit this author</button> </a>
+    <form class="nav-link" action="/authors/{{ $author->id }}" method="post">
       {{ @csrf_field() }}
       {{ @method_field('DELETE') }}
-      <button type="submit" name="deleteButton">Delete this author record</button>
+      <button type="submit" class="btn" name="deleteButton">Delete this author</button>
     </form>
-    <p>
-      <a href="/books/create"> Create a new author </a>
-    </p>
+    <div class="h-divider"></div>
+
   @endif
 
-  @include('error')
+@include('error')
 @stop
