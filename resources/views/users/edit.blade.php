@@ -16,7 +16,7 @@
     <div class="field">
       <div class="control">
         <label class="label col-md-3">User's Email:</label>
-        <input class="input" type="text" name="name" value="{{$user->email}}" name="name">
+        <input class="input" type="text" name="name" value="{{$user->email}}">
       </div>
     </div>
 
