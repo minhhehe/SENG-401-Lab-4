@@ -44,9 +44,10 @@
         <div class="control">
           <label class="label col-md-3">User's Role: </label>
           <select name="role">
-              <option value="visitor" selected="{{$role_v}}"> Visitor </option>
-              <option value="subscriber" selected="{{$role_s}}"> Subscriber </option>
-              <option value="admin" selected="{{$role_a}}"> Admin </option>
+              <option disabled selected value> -- Currently: {{$user->role}} -- </option>
+              <option value="visitor"> Visitor </option>
+              <option value="subscriber"> Subscriber </option>
+              <option value="admin"> Admin </option>
           </select>
         </div>
       </div>
