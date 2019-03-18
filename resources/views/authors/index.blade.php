@@ -26,7 +26,7 @@
           <button type="submit" class="btn" name="deleteButton">Delete</button>
         </form>
         <li><div class="v-divider"></div></li>
-        <li><a class="nav-item" href="/$authors/{{ $author->id }}/edit"><button type="button" class="btn">Edit</button> </a>
+        <li><a class="nav-item" href="/authors/{{ $author->id }}/edit"><button type="button" class="btn">Edit</button> </a>
         <li><div class="v-divider"></div></li>
         @endif
         <li class="nav-item"><a class="nav-link" href="{{ action('AuthorsController@show', [$author->id])}}"> {{ $author->name}} </a></li>
