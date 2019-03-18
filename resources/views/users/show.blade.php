@@ -1,10 +1,14 @@
-@extends('layouts.welcome')
+@extends('layouts.subpage')
+@section('page_title')
+  System Users
+@endsection
+
+@section('subtitle')
+  <h5>User Details</h5>
+@endsection
 
 @section('content')
-  <h1> User detail Page </h1>
-
   <user>
-
     <div class="field">
       <label class="label">User's email:</label>
 
@@ -21,18 +25,20 @@
         </div>
 
         <div>
-          Books subscribed to:
+          Subscriptions:
+          <div class="h-divider"></div>
           @foreach ($books as $book)
             <a href="/books/{{ $book->id }}"> {{$book->name}} </a>
           </br>
           @endforeach
+          <div class="h-divider"></div>
         </div>
 
       </div>
   </user>
 
   <p>
-    <a href="/users/{{ $user->id }}/edit"> Edit this user's record </a>
+    <a class="nav-item" href="/users/{{ $user->id }}/edit"><button type="button" class="btn">Edit this user's record</button></a>
   </p>
 
   @include('error')
