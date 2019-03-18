@@ -25,6 +25,7 @@
         </ul>
       </nav>
     </ul>
+    <div class="h-divider"></div>
     @endforeach
   </nav>
 
