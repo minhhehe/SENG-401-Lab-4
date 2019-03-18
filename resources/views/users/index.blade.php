@@ -1,10 +1,15 @@
 @extends('layouts.subpage')
 
+@section('page_title')
+  System Users
+@endsection
+
+@section('subtitle')
+  View and edit users
+@endsection
+
 @section('content')
-  <h1> System Users </h1>
-
-
-  <div class="container_big">
+  <div class="">
   @foreach ($users as $user)
     <article>
         <a href="{{ action('UsersController@show', [$user->id])}}"> {{ $user->email}} </a>
