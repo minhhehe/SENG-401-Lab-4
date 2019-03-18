@@ -1,4 +1,4 @@
-@extends('layouts.subpage')
+@extends('layouts.index')
 
 @section('page_title')
   System Users
