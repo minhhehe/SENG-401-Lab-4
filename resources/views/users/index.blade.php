@@ -1,7 +1,7 @@
-@extends('layouts.welcome')
+@extends('layouts.subpage')
 
 @section('content')
-  <h1> Users Page </h1>
+  <h1> System Users </h1>
 
 
   <div class="container_big">

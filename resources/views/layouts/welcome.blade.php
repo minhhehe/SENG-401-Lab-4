@@ -10,68 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <style>
-
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-            .is-complete {
-              text-decoration: line-through;;
-            }
-
-            .container_big { border:2px solid #ccc; width:600px; height: 300px; overflow-y: scroll; }
-
-            .container_medium { border:2px solid #ccc; width:450px; height: 100px; overflow-y: scroll; }
-
-            .container_small { border:2px solid #ccc; width:300px; height: 100px; overflow-y: scroll; }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
+        <link href="{{ asset('css/seng401.css') }}" rel="stylesheet">
     </head>
     <body>
         <div class="flex-center position-ref full-height">
