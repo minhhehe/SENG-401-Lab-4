@@ -10,31 +10,25 @@
 @section('content')
   <user>
     <div class="field">
-      <label class="label">User's email:</label>
+      <label class="label">User's email:</label><b> {{ $user->email }}</b>
+      <div>Education_field: {{ $user->education_field }}</div>
+      <div>Birthday: {{ $user->birthday }}</div>
+      <div>Role: {{ $user->role }}</div>
 
-      <b> {{ $user->email }}</b>
-
-        <div>
-          Education_field: {{ $user->education_field }}
-        </div>
-        <div>
-          Birthday: {{ $user->birthday }}
-        </div>
-        <div>
-          Role: {{ $user->role }}
-        </div>
-
-        <div>
-          Subscriptions:
-          <div class="h-divider"></div>
-          @foreach ($books as $book)
-            <a href="/books/{{ $book->id }}"> {{$book->name}} </a>
-          </br>
-          @endforeach
-          <div class="h-divider"></div>
-        </div>
-
+      <div>
+        Subscriptions:
+        <div class="h-divider"></div>
+        @foreach ($books as $book)
+        <nav class="navbar navbar-light bg-light">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="/books/{{ $book->id }}"> {{$book->name}} </a></li>
+          </ul>
+        </nav>
+        @endforeach
+        <div class="h-divider"></div>
       </div>
+
+    </div>
   </user>
 
   <p>
