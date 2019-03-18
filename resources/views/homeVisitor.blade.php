@@ -5,5 +5,11 @@
 @endsection
 
 @section('home_menu')
-  <a href="/books"> View all books </a>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse navbar-nav" id="viewAllBooksLink">
+      <a class="nav-item nav-link" href="/books"> View all books </a>
+  </div>
+</nav>
+
 @endsection
