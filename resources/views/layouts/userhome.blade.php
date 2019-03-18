@@ -18,6 +18,25 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style type="text/css">
+      .h-divider{
+       margin-top:5px;
+       margin-bottom:5px;
+       height:1px;
+       width:100%;
+       border-top:1px solid lightgray;
+    }
+      .v-divider{
+     margin-left:5px;
+     margin-right:5px;
+     width:1px;
+     height:100%;
+     border-left:1px solid lightgray;
+    }
+    .margin-center{
+      margin:auto;
+    }
+</style>
 </head>
 <body>
     <div id="app">
