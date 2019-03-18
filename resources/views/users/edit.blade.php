@@ -1,7 +1,7 @@
 @extends('layouts.subpage')
 
 @section('page_title')
-  Edit User: "{{Auth::user()->email}}"
+  Edit User: "{{$user->email}}"
 @endsection
 
 @section('subtitle')
