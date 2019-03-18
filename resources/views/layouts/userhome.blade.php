@@ -100,7 +100,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header">Dashboard: {{ $user->role }}</div>
+                            <div class="card-header" style="background:lightgray;">Dashboard: {{ $user->role }}</div>
 
                                  @yield('home_menu')
 
