@@ -1,24 +1,28 @@
-@extends('layouts.welcome')
+@extends('layouts.subpage')
 
-<style>
-  .container { border:2px solid #ccc; width:300px; height: 100px; overflow-y: scroll; }
-</style>
+@section('page_title')
+  Edit Author: "{{$author->name}}"
+@endsection
+
+@section('subtitle')
+  Ensure all fields are complete
+@endsection
+
 @section('content')
-  <h1> Author Edit Page </h1>
   <form action="/authors/{{$author->id}}" method="post">
     {{@csrf_field()}}
     {{ method_field('PATCH') }}
+    <br>
     <div class="field">
-      <label class="label">Author's Name</label>
       <div class="control">
-        <input class="input" type="text" placeholder="{{$author->name}}" name="name">
-
+        <label class="label col-md-3">Author's Name:</label>
+        <input class="input" type="text" value="{{$author->name}}"  name="name">
       </div>
     </div>
-
+    <div class="h-divider"></div>
     <div>
       </br>
-      <button type="submit">Update author entry</button>
+      <button class="btn" type="submit">Update author entry</button>
     </div>
 
 </form>
