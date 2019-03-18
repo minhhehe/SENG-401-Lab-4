@@ -68,8 +68,20 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
-        return view('users.edit', compact(['user']));
+        //TODO Logic for default select role value. Needs refactor
+        $role_v = "";
+        $role_s = "";
+        $role_a = "";
+        if ($user->role == "admin") {
+          $role_a = "selected";
+        }
+        elseif ($user->role == "subscriber"){
+          $role_s = "selected";
+        }
+        else{
+          $role_v = "selected";
+        }
+        return view('users.edit', compact(['user', 'role_v', 'role_a', 'role_s']));
     }
 
     /**
