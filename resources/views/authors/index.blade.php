@@ -1,32 +1,41 @@
-@extends('layouts.welcome')
+@extends('layouts.subpage')
+
+@section('page_title')
+  Authors List
+@endsection
+
+@section('subtitle')
+  @if ($role == 'admin')
+  <h5>View, edit, or delete authors</h5><a href="/authors/create"><button type="button" class="btn"> Add a new author</button> </a>
+  @else
+  <h5>View authors</h5>
+  @endif
+@endsection
 
 @section('content')
-  <h1> Authors Page </h1>
+  <nav class="navbar navbar-light bg-light">
 
-
-  <div class="container_big">
   @foreach ($authors as $author)
-    <article>
-        <a href="{{ action('AuthorsController@show', [$author->id])}}"> {{ $author->name}} </a>
+  <ul class="navbar-nav">
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <ul class="navbar-nav">
         @if ($role == 'admin')
-        <p>
-          <a href="/$authors/{{ $author->id }}/edit"> Edit this record OR </a>
-          <form action="/authors/{{ $author->id }}" method="post">
-            {{ @csrf_field() }}
-            {{ @method_field('DELETE') }}
-            <button type="submit" name="deleteButton">Delete this author record</button>
-          </form>
-        </p>
+        <form action="/authors/{{ $author->id }}" method="post">
+          {{ @csrf_field() }}
+          {{ @method_field('DELETE') }}
+          <button type="submit" class="btn" name="deleteButton">Delete</button>
+        </form>
+        <li><div class="v-divider"></div></li>
+        <li><a class="nav-item" href="/$authors/{{ $author->id }}/edit"><button type="button" class="btn">Edit</button> </a>
+        <li><div class="v-divider"></div></li>
         @endif
-    </article>
+        <li class="nav-item"><a class="nav-link" href="{{ action('AuthorsController@show', [$author->id])}}"> {{ $author->name}} </a></li>
+      </ul>
+    </nav>
+</ul>
+<div class="h-divider"></div>
   @endforeach
-  </div>
 
-
-  @if ($role == 'admin')
-  <p>
-    <a href="/authors/create"> Create a new one </a>
-  </p>
-  @endif
+</nav>
 
 @stop
