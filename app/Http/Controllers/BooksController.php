@@ -9,6 +9,7 @@ use App\Author;
 use App\AuthorBook;
 use App\Subscription;
 use App\Comment;
+use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
@@ -86,11 +87,14 @@ class BooksController extends Controller
     public function show(User $user, Book $book)
     {
         //
+        $user = auth()->user();
         $role = auth()->user()->role;
         $authors = $book->getAuthors($book);
         $comments = $book->getComments();
         $subscriber = $book->getSubscriber($book);
-        return view('books.show', compact(['book', 'authors', 'subscriber', 'role', 'comments']));
+        $subscription = DB::table('subscriptions')->where('book_id', $book->id)->first();
+        return view('books.show', compact(['book', 'authors', 'subscriber', 'role', 'comments', 'user', 'subscription']));
+
     }
 
     /**

@@ -81,17 +81,18 @@
         </div>
       </div>
     </form>
-    @else
-    <form class="form" action="subscriptions/books" method="post">
-      {{ @csrf_field() }}
-      {{ method_field('DELETE') }}
-      <div class="field">
-        <div class="control">
-          <input class="input" type="text" name="book_id" value="{{$book->id}}" hidden>
-          <button type="submit" name="submitButton">Unsubscribe</button>
+    @elseif ($subscription->user_id == $user->id)
+      <form class="form" action="subscriptions/books" method="post">
+        {{ @csrf_field() }}
+        {{ method_field('DELETE') }}
+        <div class="field">
+          <div class="control">
+            <input class="input" type="text" name="book_id" value="{{$book->id}}" hidden>
+            <button type="submit" name="submitButton">Unsubscribe</button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+
     @endif
   @endif
 
