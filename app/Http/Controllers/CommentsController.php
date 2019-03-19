@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Book;
 use App\Comment;
+use App\History;
+use App\Rules\CommentCheck;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -40,9 +42,10 @@ class CommentsController extends Controller
         //
         $validated = request()->validate([
           'comment' => ['required'],
-          'book_id' => ['required'],
+          'book_id' => ['required', new CommentCheck],
         ]);
         $validated['user_id'] = auth()->user()->id;
+
         Comment::create($validated);
         return back();
     }

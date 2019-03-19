@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Book;
 use App\Subscription;
+use App\History;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -61,12 +62,13 @@ class SubscriptionsController extends Controller
         $datBook = Book::where('id', $request['book_id'])->get()->first();
         $datBook->update(['sub_status' => 'subscribed']);
 
-          Subscription::create($validated);
+        Subscription::create($validated);
+        History::create($validated);
 
-          if (auth()->user()->role == "subscriber") {
-            $request['user_id'] = auth()->user()->id;
-          }
-          return redirect($toGo);
+        if (auth()->user()->role == "subscriber") {
+          $request['user_id'] = auth()->user()->id;
+        }
+        return redirect($toGo);
     }
 
     /**
