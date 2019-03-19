@@ -16,6 +16,7 @@ class UsersController extends Controller
     public function index()
     {
         //
+        $this->authorize('view');
         $users = User::all();
         return view('users.index', compact(['users']));
     }
@@ -56,6 +57,7 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //
+        $this->authorize('view');
         $books = User::getSubscribedBooks($user);
         return view('users.show', compact(['user', 'books']));
     }
@@ -69,6 +71,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         //TODO Logic for default select role value. Needs refactor
+        $this->authorize('update');
         $role_v = "";
         $role_s = "";
         $role_a = "";

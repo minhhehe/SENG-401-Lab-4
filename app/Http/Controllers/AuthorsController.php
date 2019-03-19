@@ -17,8 +17,13 @@ class AuthorsController extends Controller
     public function index()
     {
         //
+        //BUG: NOT CALLING authorpolicy's view
+      //  $this->authorize('12342');
+        $this -> authorize('view');
         $role = auth()->user()->role;
+
         $authors = Author::get();
+
         return view('authors.index', compact(['authors', 'role']));
     }
 
@@ -30,6 +35,7 @@ class AuthorsController extends Controller
     public function create()
     {
         //
+        $this->authorize('create');
         return view('authors.create');
     }
 
@@ -60,6 +66,7 @@ class AuthorsController extends Controller
     public function show(User $user, Author $author)
     {
         //
+      //  $this->authorize('view');
         $role = auth()->user()->role;
         $books = $author->getBooks();
         return view('authors.show', compact('author', 'books', 'role'));
@@ -75,6 +82,7 @@ class AuthorsController extends Controller
     public function edit(User $user, Author $author)
     {
         //
+        $this->authorize('update');
         return view('authors.edit', compact('author'));
     }
 
@@ -88,6 +96,7 @@ class AuthorsController extends Controller
     public function update(Request $request, User $user, Author $author)
     {
         //
+        $this->authorize('update');
         $author->update(request([
           'name'
         ]));
