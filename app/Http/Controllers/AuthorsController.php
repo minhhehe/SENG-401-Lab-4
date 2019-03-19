@@ -96,7 +96,7 @@ class AuthorsController extends Controller
     public function update(Request $request, User $user, Author $author)
     {
         //
-        $this->authorize('update');
+        $this->authorize('update', $author);
         $author->update(request([
           'name'
         ]));
