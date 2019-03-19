@@ -19,9 +19,13 @@ class AuthorPolicy
      */
     public function view(User $user, Author $author)
     {
-        return $user->role == 'subscriber';
+      return ($user->role == 'subscriber');
     }
 
+
+    public function index(User $user) {
+      return $user->role == 'subscriber';
+    }
     /**
      * Determine whether the user can create authors.
      *

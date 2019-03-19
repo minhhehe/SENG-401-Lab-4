@@ -14,12 +14,12 @@ class AuthorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
         //
         //BUG: NOT CALLING authorpolicy's view
       //  $this->authorize('12342');
-        $this -> authorize('view');
+        $this -> authorize('index', Author::class);
         $role = auth()->user()->role;
 
         $authors = Author::get();
@@ -66,7 +66,7 @@ class AuthorsController extends Controller
     public function show(User $user, Author $author)
     {
         //
-      //  $this->authorize('view');
+        $this->authorize('view', $author);
         $role = auth()->user()->role;
         $books = $author->getBooks();
         return view('authors.show', compact('author', 'books', 'role'));
