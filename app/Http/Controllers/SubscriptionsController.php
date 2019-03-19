@@ -18,6 +18,7 @@ class SubscriptionsController extends Controller
     public function index(User $user)
     {
         //
+        $this->authorize('view');
         $subs = Subscription::getAll();
         return view('subscriptions.index', compact(['subs']));
     }
@@ -30,6 +31,7 @@ class SubscriptionsController extends Controller
     public function create()
     {
         //
+        $this->authorize('create');
         $books = \App\Book::all();
         $users = \App\User::all();
         return view('subscriptions.create', compact(['books','users']));

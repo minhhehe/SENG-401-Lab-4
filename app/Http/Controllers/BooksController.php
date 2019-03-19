@@ -109,6 +109,7 @@ class BooksController extends Controller
     public function edit(User $user, Book $book)
     {
         //
+        $this->authorize('update');
         $authors = Author::get();
         return view('books.edit', compact(['book', 'authors']));
     }
