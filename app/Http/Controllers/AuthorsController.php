@@ -82,7 +82,7 @@ class AuthorsController extends Controller
     public function edit(User $user, Author $author)
     {
         //
-        $this->authorize('update');
+        $this->authorize('update',$author);
         return view('authors.edit', compact('author'));
     }
 

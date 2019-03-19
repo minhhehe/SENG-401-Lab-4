@@ -21,7 +21,7 @@ class BooksController extends Controller
     public function index()
     {
         //
-        //$this->authorize('view');
+        $this->authorize('index',Book::class);
         $role = auth()->user()->role;
         $books = Book::orderBy('created_at', 'asc')->get();
 
@@ -109,6 +109,7 @@ class BooksController extends Controller
     public function edit(User $user, Book $book)
     {
         //
+        $this->authorize('update',$book);
         $authors = Author::get();
         return view('books.edit', compact(['book', 'authors']));
     }

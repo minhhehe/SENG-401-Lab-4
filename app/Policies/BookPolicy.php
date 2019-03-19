@@ -19,8 +19,17 @@ class BookPolicy
      */
     public function view(User $user, book $book)
     {
-        return true;
+        if($user->role == 'visitor' || $user->role == 'subscriber'){
+          return true;
+        }
+        return false;
     }
+
+    public function index(User $user)
+    {
+        return ($user->role == 'visitor' || $user->role == 'subscriber');
+    }
+
 
     /**
      * Determine whether the user can create books.
