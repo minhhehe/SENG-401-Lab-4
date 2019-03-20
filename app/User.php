@@ -48,4 +48,12 @@ class User extends Authenticatable
       return $books;
     }
 
+    public static function getNonVisitorUsers() {
+      $users = DB::table('users')
+        ->select()
+        ->where('role', '!=', 'visitor')
+        ->get();
+      return $users;
+    }
+
 }

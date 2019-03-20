@@ -34,7 +34,7 @@ class SubscriptionsController extends Controller
         //
         $this->authorize('create');
         $books = \App\Book::all();
-        $users = \App\User::all();
+        $users = \App\User::getNonVisitorUsers();
         return view('subscriptions.create', compact(['books','users']));
     }
 

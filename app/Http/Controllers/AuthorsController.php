@@ -53,8 +53,7 @@ class AuthorsController extends Controller
         ]);
 
         Author::create($validated);
-
-        return view('authors.index');
+        return redirect('/authors/');
     }
 
     /**
