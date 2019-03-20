@@ -1,48 +1,96 @@
 @extends('layouts.subpage')
 
 @section('page_title')
-  Book Information: "{{Auth::user()->email}}"
+  Book Information: "{{$book->name}}"
 @endsection
 
 @section('subtitle')
   <h5>Book Details</h5>
+
+  @if ($role == 'admin')
+  <p>
+    <form style="display:inline;" action="/books/{{ $book->id }}" method="post">
+      {{ @csrf_field() }}
+      {{ @method_field('DELETE') }}
+      <button class="btn" type="submit" name="deleteButton">Delete this book</button>
+    </form>
+    <a href="/books/{{ $book->id }}/edit"><button class="btn" type="submit" name="editButton">Edit this book </button></a>
+  </p>
+  @endif
 @endsection
 
 @section('content')
-  <h1> Book detail Page </h1>
-
   <book>
-    <div>
-      <img src="{{ $book->image }}" alt="{{$book->name}}">
+    <div style="background:lightgrey;">
+      <img class="block-center" src="{{ $book->image }}" alt="{{$book->name}}">
     </div>
 
+    <div class="h-divider"></div>
+
     <div class="field">
-      <label class="label">Book's name:</label>
+      <table style="margin:10px;">
+        <tr>
+          <td><label class="label">Title:</label></td>
+          <td><b>{{ $book->name }}</b></td>
+        </tr>
 
-      <b> {{ $book->name }}</b>
-        <div>
-          Authors:</br>
+        <tr>
+          <td><label class="label">ISBN: </label></td>
+          <td><b>{{ $book->isbn }}</b></td>
+        </tr>
+
+        <tr>
+          <td><label class="label">Year: </label></td>
+          <td><b>{{ $book->year }}</b></td>
+        </tr>
+
+        <tr>
+          <td><label class="label">Publisher: </label></td>
+          <td><b>{{ $book->publisher }}</b></td>
+        </tr>
+
+        <tr><td>
+          <label class="label">Authors: </label></br>
           @foreach ($authors as $author)
-            <a href="/authors/{{ $author->id }}"> {{ $author->name}} </a> </br>
+            <b><a class="nav-item nav-link" href="/authors/{{ $author->id }}"> {{ $author->name}} </a></b> </br>
             @endforeach
-        </div>
+        </td></tr>
+        </table>
 
         <div>
-          ISBN: {{ $book->isbn }}
-        </div>
-        <div>
-          Year: {{ $book->year }}
-        </div>
-        <div>
-          Publisher: {{ $book->publisher }}
-        </div>
-
-        <div>
-          Subscription status: {{ $book->sub_status }}
+          <label class="label">Subscription status:</label> {{ $book->sub_status }}
           @if (count($subscriber) > 0)
-            by {{ $subscriber[0]->email }}
+            by <b>{{ $subscriber[0]->email }}</b>
           @endif
         </div>
+
+        @if ($role == 'admin' || $role == 'subscriber')
+          @if ($book->sub_status == 'unsubscribed')
+          <form class="form" action="/subscriptions" method="post">
+            {{ @csrf_field() }}
+            <div class="field">
+              <div class="control">
+                <input class="input" type="text" name="book_id" value="{{$book->id}}" hidden>
+                <button class="btn" type="submit" name="submitButton">Subscribe</button>
+              </div>
+            </div>
+          </form>
+          @elseif ($subscription->user_id == $user->id)
+            <form class="form" action="subscriptions/books" method="post">
+              {{ @csrf_field() }}
+              {{ method_field('DELETE') }}
+              <div class="field">
+                <div class="control">
+                  <input class="input" type="text" name="book_id" value="{{$book->id}}" hidden>
+                  <button class="btn" type="submit" name="submitButton">Unsubscribe</button>
+                </div>
+              </div>
+            </form>
+          @endif
+        @endif
+
+        <div class="h-divider"></div>
+        <br>
 
         <div class="container_medium">
           Comments:
@@ -64,8 +112,9 @@
           @else No comment yet! Be the first to comment!
           @endif
         </div>
-    </div>
   </book>
+<br>
+
 
   @if ($role == 'admin' || $role == 'subscriber')
     <form class="form" action="/comments" method="post">
@@ -79,40 +128,6 @@
         </div>
       </div>
     </form>
-    @if ($book->sub_status == 'unsubscribed')
-    <form class="form" action="/subscriptions" method="post">
-      {{ @csrf_field() }}
-      <div class="field">
-        <div class="control">
-          <input class="input" type="text" name="book_id" value="{{$book->id}}" hidden>
-          <button type="submit" name="submitButton">Subscribe</button>
-        </div>
-      </div>
-    </form>
-    @elseif ($subscription->user_id == $user->id)
-      <form class="form" action="subscriptions/books" method="post">
-        {{ @csrf_field() }}
-        {{ method_field('DELETE') }}
-        <div class="field">
-          <div class="control">
-            <input class="input" type="text" name="book_id" value="{{$book->id}}" hidden>
-            <button type="submit" name="submitButton">Unsubscribe</button>
-          </div>
-        </div>
-      </form>
-
-    @endif
-  @endif
-
-  @if ($role == 'admin')
-  <p>
-    <a href="/books/{{ $book->id }}/edit"> Edit this book </a> OR
-    <form action="/books/{{ $book->id }}" method="post">
-      {{ @csrf_field() }}
-      {{ @method_field('DELETE') }}
-      <button type="submit" name="deleteButton">Delete it</button>
-    </form>
-  </p>
   @endif
 
   @include('error')
