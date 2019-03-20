@@ -91,9 +91,11 @@
 
         <div class="h-divider"></div>
         <br>
+        <div>
+          <label class="label">Comments:</label>
+        </div>
 
-        <div class="container_medium">
-          Comments:
+        <div class="container_wide">
           @if (count($comments) > 0)
             @foreach ($comments as $comment)
               <div>
@@ -101,13 +103,14 @@
                   {{$comment->comment}}
                 </br>
                 @if ($role == 'admin')
-                <form action="/comments/{{ $comment->id }}" method="post">
+                <form style="text-align: right;"  action="/comments/{{ $comment->id }}" method="post">
                   {{ @csrf_field() }}
                   {{ @method_field('DELETE') }}
-                  <button type="submit" name="deleteButton">Delete this comment</button>
+                  <button class="btn btn-sm" type="submit" name="deleteButton">Delete this comment</button>
                 </form>
                 @endif
               </div>
+              <div class="h-divider"></div>
             @endforeach
           @else No comment yet! Be the first to comment!
           @endif
@@ -117,14 +120,14 @@
 
 
   @if ($role == 'admin' || $role == 'subscriber')
-    <form class="form" action="/comments" method="post">
+    <form class="form" action="/comments" method="post" style="width:auto;">
       {{ @csrf_field() }}
       <div class="field">
         <label class="label">Add a comment</label>
-        <div class="control">
-          <input class="input" type="text" placeholder="Your comment..." name="comment">
+        <div class="control" style="display:flex;width:100%;" >
+          <input class="input"  style="flex-grow:1;" type="text" placeholder="Your comment..." name="comment">
           <input class="input" type="text" value="{{$book->id}}" name="book_id" hidden>
-          <button type="submit">Comment</button>
+          <button class="btn btn-sm" type="submit">Comment</button>
         </div>
       </div>
     </form>
