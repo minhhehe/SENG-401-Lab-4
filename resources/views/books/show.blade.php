@@ -1,4 +1,12 @@
-@extends('layouts.welcome')
+@extends('layouts.subpage')
+
+@section('page_title')
+  Book Information: "{{Auth::user()->email}}"
+@endsection
+
+@section('subtitle')
+  <h5>Book Details</h5>
+@endsection
 
 @section('content')
   <h1> Book detail Page </h1>
