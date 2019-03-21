@@ -6,6 +6,7 @@ use App\User;
 use App\Book;
 use App\Subscription;
 use App\History;
+use App\Rules\SubscriptionFromAdminCheck;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -52,22 +53,16 @@ class SubscriptionsController extends Controller
           $toGo = '/books/'.$request['book_id'];
           $request['user_id'] = auth()->user()->id;
         }
-        $bookIds = Subscription::where('book_id', $request['book_id'])->get()->pluck('book_id');
+
         $validated = request()->validate([
           'user_id' => ['required'],
-          'book_id' => ['required', Rule::notIn($bookIds)],
+          'book_id' => ['required', new SubscriptionFromAdminCheck],
         ]);
-        $user = User::find($request['book_id']);
 
-        $datBook = Book::where('id', $request['book_id'])->get()->first();
-        $datBook->update(['sub_status' => 'subscribed']);
-
+        Book::makeABookSubscribed($request['book_id']);
         Subscription::create($validated);
         History::create($validated);
 
-        if (auth()->user()->role == "subscriber") {
-          $request['user_id'] = auth()->user()->id;
-        }
         return redirect($toGo);
     }
 
@@ -116,13 +111,10 @@ class SubscriptionsController extends Controller
      */
     public function destroyFromUser(Request $request)
     {
-        $datBook = Book::find($request['book_id']);
-        $subscription = Subscription::where('book_id', $request['book_id'])->get()->first();
-
-        $subscription->delete();
+        Book::makeABookUnsubscribed($request['book_id']);
+        Subscription::deleteSubscriptionOnBookID($request['book_id']);
         //Subscription::delete($subscription);
 
-        $datBook->update(['sub_status' => 'unsubscribed']);
         return redirect('/books/'.$request['book_id']);
     }
 
@@ -135,12 +127,8 @@ class SubscriptionsController extends Controller
      */
     public function destroy(Subscription $subscription)
     {
-
-        $datBook = Book::where('id', $subscription['book_id'])->get()->first();
-
+        Book::makeABookUnsubscribed($subscription['book_id']);
         $subscription->delete();
-
-        $datBook->update(['sub_status' => 'unsubscribed']);
         return redirect('/subscriptions');
     }
 }

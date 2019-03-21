@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-  
+
   @foreach ($books as $book)
   <ul class="navbar-nav">
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
