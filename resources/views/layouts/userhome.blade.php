@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/seng401.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -35,6 +36,9 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
+
+                    <!-- Center of Navbar -->
+                    <span class="navbar-brand">Welcome @yield('user_identifier') </span>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -73,7 +77,20 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header" style="background:lightgray;">Dashboard: {{ $user->role }}</div>
+
+                                 @yield('home_menu')
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>

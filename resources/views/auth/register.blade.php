@@ -12,20 +12,6 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -61,6 +47,33 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="education_field" class="col-md-4 col-form-label text-md-right">{{ __('Education Field') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="education_field" type="text" class="form-control{{ $errors->has('education_field') ? ' is-invalid' : '' }}" name="education_field" value="{{ old('education_field') }}" required autofocus>
+
+                                @if ($errors->has('education_field'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('education_field') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="birthday" class="col-md-4 col-form-label text-md-right">{{ __('Birthday') }}</label>
+                          <div class="col-md-6">
+                              <input id="birthday" type="date" class="form-control{{ $errors->has('birthday') ? ' is-invalid' : '' }}" name="birthday" value="{{ old('birthday') }}" required autofocus>
+
+                              @if ($errors->has('birthday'))
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $errors->first('birthday') }}</strong>
+                                  </span>
+                              @endif
+                          </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -74,4 +87,6 @@
         </div>
     </div>
 </div>
+
+  @include('error')
 @endsection
