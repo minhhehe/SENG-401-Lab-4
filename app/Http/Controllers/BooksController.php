@@ -110,8 +110,9 @@ class BooksController extends Controller
     {
         //
         $this->authorize('update',$book);
+        $book_authors = $book->getAuthors($book);
         $authors = Author::get();
-        return view('books.edit', compact(['book', 'authors']));
+        return view('books.edit', compact(['book', 'book_authors', 'authors']));
     }
 
     /**

@@ -43,7 +43,13 @@
         <label class="label col-md-3" style="vertical-align: top;">Book's Author(s):</label>
         <div class="container_small" style="display:inline-block;">
           @foreach ($authors as $author)
-          <input type="checkbox" name="authors[]" value="{{$author->id}}"> <label class="label">{{$author->name}}</label>
+          @foreach ($book_authors as $book_author)
+              @if ($book_author->name == $author->name)
+                <input type="checkbox" checked name="authors[]" value="{{$author->id}}"> <label class="label">{{$author->name}}</label>
+              @else
+                <input type="checkbox" name="authors[]" value="{{$author->id}}"> <label class="label">{{$author->name}}</label>
+              @endif
+            @endforeach
           <br />
           @endforeach
         </div>
