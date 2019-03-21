@@ -95,7 +95,7 @@ class BooksController extends Controller
         $authors = $book->getAuthors($book);
         $comments = $book->getComments();
         $subscriber = $book->getSubscriber($book);
-        $subscription = DB::table('subscriptions')->where('book_id', $book->id)->first();
+        $subscription = Subscription::getSubscription($book);
         return view('books.show', compact(['book', 'authors', 'subscriber', 'role', 'comments', 'user', 'subscription']));
 
     }
@@ -159,12 +159,9 @@ class BooksController extends Controller
     public function destroy(User $user, Book $book)
     {
         //
-        $subscriptions = Subscription::where('book_id', $book->id)->get();
-        $comments = Comment::where('book_id', $book->id)->get();
-        $author_books = AuthorBook::where('book_id', $book->id)->get();
-        foreach($subscriptions as $subscription) $subscription->delete();
-        foreach($comments as $comment) $comment->delete();
-        foreach($author_books as $author_book) $author_book->delete();
+        Subscription::deleteAllSubscriptionsOnBook($book->id);
+        AuthorBook::deleteAllAuthorBooksOnBook($book->id);
+        Comment::deleteAllCommentsOnBook($book->id);
         $book->delete();
         return redirect('/books');
     }

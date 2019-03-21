@@ -15,7 +15,6 @@ class Subscription extends Model
     ];
 
     public static function getAll() {
-
       $translate = DB::table('subscriptions')
         ->join('users', 'users.id', '=', 'subscriptions.user_id')
         ->join('books', 'books.id', '=', 'subscriptions.book_id')
@@ -24,7 +23,18 @@ class Subscription extends Model
       return $translate;
     }
 
-    public static function checkIfAlreadyExist($values) {
+    public static function getSubscription($book) {
+      $subscription = DB::table('subscriptions')->where('book_id', $book->id)->first();
+      return $subscription;
+    }
 
+    public static function deleteSubscriptionOnBookID($book_id) {
+      $subscription = Subscription::where('book_id', $book_id)->get()->first();
+      $subscription->delete();
+    }
+
+    public static function deleteAllSubscriptionsOnBook($book_id) {
+      $subscriptions = Subscription::where('book_id', $book_id)->get();
+      foreach($subscriptions as $subscription) $subscription->delete();
     }
 }

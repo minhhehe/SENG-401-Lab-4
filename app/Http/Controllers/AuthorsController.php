@@ -116,7 +116,7 @@ class AuthorsController extends Controller
     public function destroy(User $user, Author $author)
     {
         //
-        $author_books = AuthorBook::where('author_id', $author->id)->get();
+        $author_books = AuthorBook::getAuthorBook($author->id);
         foreach($author_books as $author_book) $author_book->delete();
         $author->delete();
         return redirect('/authors');

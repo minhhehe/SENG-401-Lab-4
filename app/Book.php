@@ -44,6 +44,16 @@ class Book extends Model
       return $subscriber;
     }
 
+    public static function makeABookSubscribed($book_id) {
+      $datBook = Book::where('id', $book_id)->get()->first();
+      $datBook->update(['sub_status' => 'subscribed']);
+    }
+
+    public static function makeABookUnsubscribed($book_id) {
+      $datBook = Book::where('id', $book_id)->get()->first();
+      $datBook->update(['sub_status' => 'unsubscribed']);
+    }
+
     //
     public function authors() {
       return $this->belongsToMany('App\Author', 'author_book', 'author_id', 'book_id');
